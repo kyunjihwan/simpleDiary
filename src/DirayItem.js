@@ -1,17 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryItem = ({
-  author,
-  content,
-  emotion,
-  created_date,
-  id,
-  onRemove,
-  onEdit,
-}) => {
-  useEffect(() => {
-    console.log(`${id}번 일기 업데이트`);
-  });
+const DiaryItem = ({ author, content, emotion, created_date, id }) => {
+  const { onEdit, onRemove } = useContext(DiaryDispatchContext);
 
   const [isEdit, setIsEdit] = useState(false);
   // 수정하기 버튼을 눌렀을 때 실행되는 함수

@@ -31,21 +31,18 @@ function App() {
   }, []);
 
   // 일기 생성하는 함수
-  const onCreate = useCallback(
-    (author, content, emotion) => {
-      const created_date = new Date().getTime();
-      const newItem = {
-        author,
-        content,
-        emotion,
-        created_date,
-        id: dataId.current,
-      };
-      dataId.current += 1;
-      setData([newItem, ...data]);
-    },
-    [data]
-  );
+  const onCreate = useCallback((author, content, emotion) => {
+    const created_date = new Date().getTime();
+    const newItem = {
+      author,
+      content,
+      emotion,
+      created_date,
+      id: dataId.current,
+    };
+    dataId.current += 1;
+    setData((data) => [newItem, ...data]);
+  }, []);
 
   // 일기 삭제하는 함수
   const onRemove = (targetId) => {

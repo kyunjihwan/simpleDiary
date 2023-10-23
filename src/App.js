@@ -41,22 +41,22 @@ function App() {
       id: dataId.current,
     };
     dataId.current += 1;
+    // 함수형 업데이트 사용
     setData((data) => [newItem, ...data]);
   }, []);
 
   // 일기 삭제하는 함수
-  const onRemove = (targetId) => {
+  const onRemove = useCallback((targetId) => {
     // 해당 id 포함하지 않는 새로운 배열 생성
-    const newDiaryList = data.filter((it) => it.id !== targetId);
-    setData(newDiaryList);
-  };
+    setData((data) => data.filter((it) => it.id !== targetId));
+  }, []);
 
   // 일기 수정하는 함수
-  const onEdit = (targetId, newContent) => {
-    setData(
+  const onEdit = useCallback((targetId, newContent) => {
+    setData((data) =>
       data.map((e) => (e.id === targetId ? { ...e, content: newContent } : e))
     );
-  };
+  }, []);
 
   // useMemo로 부터 값을 리턴받는다.
   const getDiaryAnalysis = useMemo(() => {

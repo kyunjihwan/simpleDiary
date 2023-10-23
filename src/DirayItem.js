@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const DiaryItem = ({
   author,
@@ -9,6 +9,10 @@ const DiaryItem = ({
   onRemove,
   onEdit,
 }) => {
+  useEffect(() => {
+    console.log(`${id}번 일기 업데이트`);
+  });
+
   const [isEdit, setIsEdit] = useState(false);
   // 수정하기 버튼을 눌렀을 때 실행되는 함수
   const toggleIsEdit = () => {
@@ -84,4 +88,4 @@ const DiaryItem = ({
     </div>
   );
 };
-export default DiaryItem;
+export default React.memo(DiaryItem);
